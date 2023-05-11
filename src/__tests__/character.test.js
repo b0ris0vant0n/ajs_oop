@@ -1,4 +1,5 @@
 import Character from '../character';
+import Daemon from '../daemon';
 
 test('test class for Character', () => {
 	const anyUser = new Character('Bowerman', 'Bowerman');
@@ -41,3 +42,23 @@ test('test class for levelUp function for dead Character', () => {
 		anyUser.levelUp();
 	}).toThrow();
 });
+
+test('test class for damage function', () => {
+	const  anyUser = new Daemon('VV', 'Daemon');
+	anyUser.damage(10);
+
+	expect(anyUser).toEqual({
+		name: 'VV', type: 'Daemon', health: 94, level: 1, attack: 10, defence: 40,
+	})
+	
+})
+
+test('test class for damage function if health < 0', () => {
+	const  anyUser = new Daemon('VV', 'Daemon');
+	anyUser.health = -1;
+	anyUser.damage(10);
+	expect(anyUser).toEqual({
+		name: 'VV', type: 'Daemon', health: -1, level: 1, attack: 10, defence: 40,
+	})
+	
+})
